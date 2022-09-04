@@ -38,7 +38,8 @@ const loadNews = (categoryId) => {
   let url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayNews(data.data));
+    .then((data) => displayNews(data.data))
+    .catch((error) => console.log(error));
 
   const newsField = document.getElementById("news-cards");
   newsField.innerHTML = "";
@@ -123,11 +124,13 @@ const loadNewsDetails = (id) => {
   const url = `https://openapi.programming-hero.com/api/news/'${id}'`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayNewsDetails(data.data));
+    .then((data) => displayNewsDetails(data.data))
+    .catch((error) => console.log(error));
 };
 
 // loadNewsDetails();
 
 const displayNewsDetails = (news_id) => {
   console.log("aaaa " + news_id);
+  const newsDetailsModal = getElementById("");
 };
