@@ -20,6 +20,8 @@ const displayCategories = (categories) => {
 };
 
 const loadNews = (categoryId) => {
+  toggoleSpinner(true);
+
   console.log("id hoilo : " + categoryId);
 
   let url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`;
@@ -31,6 +33,16 @@ const loadNews = (categoryId) => {
   newsField.innerHTML = "";
 };
 loadNews();
+
+//spinner
+const toggoleSpinner = (isLoading) => {
+  const loaderSection = document.getElementById("loader");
+  if (isLoading) {
+    loaderSection.classList.remove("d-none");
+  } else {
+    loaderSection.classList.add("d-none");
+  }
+};
 
 const displayNews = (newsData) => {
   console.log(newsData);
@@ -103,17 +115,18 @@ const displayNews = (newsData) => {
     `;
     newsField.appendChild(newsCardDiv);
   });
+  toggoleSpinner(false);
 };
 
 const loadNewsDetails = (id) => {
   const url = `https://openapi.programming-hero.com/api/news/'${id}'`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayNewsDetails(data));
+    .then((data) => displayNewsDetails(data.data));
 };
 
 // loadNewsDetails();
 
-const displayNewsDetails = (news) => {
-  console.log("aaaa " + news._id);
+const displayNewsDetails = (news_id) => {
+  console.log("aaaa " + news_id);
 };
