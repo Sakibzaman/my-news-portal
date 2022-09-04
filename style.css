@@ -3,3 +3,6 @@
   height: 45px !important;
   border-radius: 999px;
 }
+#news-number-container {
+  display: none;
+}

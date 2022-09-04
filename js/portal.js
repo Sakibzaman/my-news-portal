@@ -18,6 +18,7 @@ const displayCategories = (categories) => {
            <button class="btn btn-primary" onClick="loadNews('${category.category_id}')" href=""> ${category.category_name}</button>`;
     categoriesField.appendChild(categoriesDiv);
   });
+  // console.log(categories);
 };
 
 //spinner
@@ -33,7 +34,7 @@ const toggoleSpinner = (isLoading) => {
 const loadNews = (categoryId) => {
   toggoleSpinner(true);
 
-  console.log("id hoilo : " + categoryId);
+  // console.log("id hoilo : " + categoryId);
 
   let url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`;
   fetch(url)
@@ -47,15 +48,17 @@ const loadNews = (categoryId) => {
 loadNews();
 
 const displayNews = (newsData) => {
-  console.log("newsdata here " + newsData);
-
+  console.log(newsData);
+  const numberSpan = document.getElementById("news-number");
+  document.getElementById("news-number-container").style.display = "block";
+  numberSpan.innerText = `${newsData.length}`;
   newsData.forEach((news) => {
     //clear text
     const newsField = document.getElementById("news-cards");
     const newsCardDiv = document.createElement("div");
     // newsField.innerHTML='';
     // newsField.appendChild(newsCardDiv);
-    console.log("length: " + newsData);
+    // console.log("length: " + newsData);
     if (
       news.length === 0 ||
       news.length === undefined ||
@@ -124,7 +127,7 @@ const displayNews = (newsData) => {
 
 const loadNewsDetails = (newsId) => {
   const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
-  console.log("my news id " + newsId);
+  // console.log("my news id " + newsId);
   fetch(url)
     .then((res) => res.json())
     .then((data) => displayNewsDetails(data.data))
@@ -134,7 +137,7 @@ const loadNewsDetails = (newsId) => {
 // loadNewsDetails();
 
 const displayNewsDetails = (newsDetails) => {
-  console.log(newsDetails);
+  // console.log(newsDetails);
   const newsDetailsModal = document.getElementById("newsDetailsModal");
   //   const modalDiv = document.createElement("div");
   newsDetailsModal.innerHTML = `
