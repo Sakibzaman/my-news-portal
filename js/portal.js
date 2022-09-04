@@ -106,12 +106,14 @@ const displayNews = (newsData) => {
 };
 
 const loadNewsDetails = (id) => {
-  const url = `https://openapi.programming-hero.com/api/news/${id}`;
+  const url = `https://openapi.programming-hero.com/api/news/'${id}'`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => console.log(data.data));
+    .then((data) => displayNewsDetails(data));
 };
 
-loadNewsDetails(newsData._id);
+// loadNewsDetails();
 
-const displayNewsDetails = (news) => {};
+const displayNewsDetails = (news) => {
+  console.log("aaaa " + news._id);
+};
