@@ -14,7 +14,7 @@ const displayCategories = (categories) => {
     const categoriesDiv = document.createElement("div");
     categoriesDiv.classList.add("col", "text-center");
     categoriesDiv.innerHTML = `
-           <button onClick="loadNews('${category.category_id}')" href=""> ${category.category_name}</button>`;
+           <button class="btn btn-primary" onClick="loadNews('${category.category_id}')" href=""> ${category.category_name}</button>`;
     categoriesField.appendChild(categoriesDiv);
   });
 };
@@ -54,21 +54,24 @@ const displayNews = (newsData) => {
     }
     newsCardDiv.innerHTML = `
     <div>   
-        <div class="row my-3">
-            <div class="col-4 my-5">
-                <img class="w-75" src="${news.image_url}">
+        <div class="row my-3 border border-white-50">
+            <div class="col-4 my-auto">
+                <img class="w-100" src="${news.image_url}">
             </div>
-            <div class="col-8">
+            <div class="col-8 py-4 px-5">
                 <div>
-                    <h6>${news.title}</h6>
+                    <h5 clas="my-2">${news.title}</h5>
                     <p>${news.details.slice(0, 200)}...</p>
                 </div>
-                <div class="">
-                    <div class="row justify-content-around">
-                        <div class="col-3">
-                            <img class="author-img" src = "${news.author.img}">
-                        </div>
-                        <div class="col-3">
+                <div class="d-flex justify-content-between my-3">
+                    <div>
+                        <div class="d-flex">
+                            <div>
+                                <img class="author-img" src = "${
+                                  news.author.img
+                                }">
+                            </div>
+                            <div class="mx-3">
                             <h6>${
                               news.author.name
                                 ? news.author.name
@@ -79,17 +82,20 @@ const displayNews = (newsData) => {
                                 ? news.author.published_date
                                 : "No data found"
                             }</p>
+                            </div>
                         </div>
-                        <div  class="col-3">
-                            <p>View:${news.total_view}</p>    
-                        </div>
-                        <div  class="col-3">
-                            <button  type="button"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#newsDetailsModal">Show Details</button>    
-                        </div>
-                    </div>                    
+                    </div>                                            
+                    <div>
+                        <strong><i class="fa-regular fa-eye mx-2"></i>${
+                          news.total_view
+                        }</strong>    
+                    </div>
+                    <div>
+                        <button onClick="loadNewsDetails()"  type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#newsDetailsModal">Read More</button>    
+                    </div>                   
                 </div>
             </div>
         </div>
@@ -98,3 +104,14 @@ const displayNews = (newsData) => {
     newsField.appendChild(newsCardDiv);
   });
 };
+
+const loadNewsDetails = (id) => {
+  const url = `https://openapi.programming-hero.com/api/news/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => console.log(data.data));
+};
+
+loadNewsDetails(newsData._id);
+
+const displayNewsDetails = (news) => {};
