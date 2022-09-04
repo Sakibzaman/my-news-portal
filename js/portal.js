@@ -70,12 +70,11 @@ const displayNews = (newsData) => {
     <div>   
         <div class="row my-3 border border-white-50">
             <div class="col-4 my-auto">
-                <img class="w-100" src="${news.image_url}">
+                <img class="w-100 h-100" src="${news.image_url}">
             </div>
             <div class="col-8 py-4 px-5">
                 <div>
                     <h5 clas="my-2">${news.title}</h5>
-                    <p>"News_Id"${news._id}</p>
                     <p>${news.details.slice(0, 200)}...</p>
                 </div>
                 <div class="d-flex justify-content-between my-3">
@@ -140,8 +139,8 @@ const displayNewsDetails = (newsDetails) => {
   //   const modalDiv = document.createElement("div");
   newsDetailsModal.innerHTML = `
          <div class="bg-white w-75 my-4 mx-auto p-5">
-            <img class="img img-fluid w-25 mx-auto" src="${newsDetails[0].image_url}">
-            <h4 class="my-2">${newsDetails[0].title} </h4>
+            <img class="img img-fluid w-100 mx-auto" src="${newsDetails[0].image_url}">
+            <h3 class="my-4">${newsDetails[0].title} </h3>
             <p></p>${newsDetails[0].details}</p           
         </div>
     `;
