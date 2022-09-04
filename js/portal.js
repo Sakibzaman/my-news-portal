@@ -47,7 +47,7 @@ const loadNews = (categoryId) => {
 loadNews();
 
 const displayNews = (newsData) => {
-  console.log(newsData);
+  console.log("newsdata here " + newsData);
 
   newsData.forEach((news) => {
     //clear text
@@ -55,7 +55,7 @@ const displayNews = (newsData) => {
     const newsCardDiv = document.createElement("div");
     // newsField.innerHTML='';
     // newsField.appendChild(newsCardDiv);
-    console.log("length: " + news.length);
+    console.log("length: " + newsData);
     if (
       news.length === 0 ||
       news.length === undefined ||
@@ -75,6 +75,7 @@ const displayNews = (newsData) => {
             <div class="col-8 py-4 px-5">
                 <div>
                     <h5 clas="my-2">${news.title}</h5>
+                    <p>"News_Id"${news._id}</p>
                     <p>${news.details.slice(0, 200)}...</p>
                 </div>
                 <div class="d-flex justify-content-between my-3">
@@ -105,7 +106,9 @@ const displayNews = (newsData) => {
                         }</strong>    
                     </div>
                     <div>
-                        <button onClick="loadNewsDetails()"  type="button"
+                        <button onClick="loadNewsDetails('${
+                          news._id
+                        }')"  type="button"
                         class="btn btn-primary"
                         data-bs-toggle="modal"
                         data-bs-target="#newsDetailsModal">Read More</button>    
@@ -120,8 +123,9 @@ const displayNews = (newsData) => {
   toggoleSpinner(false);
 };
 
-const loadNewsDetails = (id) => {
-  const url = `https://openapi.programming-hero.com/api/news/'${id}'`;
+const loadNewsDetails = (newsId) => {
+  const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
+  console.log("my news id " + newsId);
   fetch(url)
     .then((res) => res.json())
     .then((data) => displayNewsDetails(data.data))
@@ -130,7 +134,16 @@ const loadNewsDetails = (id) => {
 
 // loadNewsDetails();
 
-const displayNewsDetails = (news_id) => {
-  console.log("aaaa " + news_id);
-  const newsDetailsModal = getElementById("");
+const displayNewsDetails = (newsDetails) => {
+  console.log(newsDetails);
+  const newsDetailsModal = document.getElementById("newsDetailsModal");
+  //   const modalDiv = document.createElement("div");
+  newsDetailsModal.innerHTML = `
+         <div class="bg-white w-75 my-4 mx-auto p-5">
+            <img class="img img-fluid w-25 mx-auto" src="${newsDetails[0].image_url}">
+            <h4 class="my-2">${newsDetails[0].title} </h4>
+            <p></p>${newsDetails[0].details}</p           
+        </div>
+    `;
+  //   newsDetailsModal.appendChild(modalDiv);
 };
